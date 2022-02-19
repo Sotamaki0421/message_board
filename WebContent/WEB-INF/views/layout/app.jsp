@@ -4,20 +4,21 @@
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
-        <title>メッセージボード</title>
+        <title>HappyBirthday Ai Furihata</title>
         <link rel="stylesheet" href="<c:url value='/css/reset.css' />">
         <link rel="stylesheet" href="<c:url value='/css/style.css' />">
+        <link rel="stylesheet" href="<c:url value='/css/letter.css' />">
+        <link rel="stylesheet" href="<c:url value='/css/flickity.css' />" media="screen">
+        <script src="<c:url value='/js/flickity.pkgd.min.js' />"></script>
     </head>
     <body>
         <div id="wrapper">
             <div id="header">
-                <h1>メッセージボード アプリケーション</h1>
             </div>
             <div id="content">
                 ${param.content}
             </div>
             <div id="footer">
-                by Taro Kirameki.
             </div>
         </div>
     </body>

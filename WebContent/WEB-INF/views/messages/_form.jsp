@@ -9,12 +9,13 @@
     </div>
 </c:if>
 
-<label for="title">タイトル</label><br />
-<input type="text" name="title" value="${message.title}" />
+<label for="user">ユーザ</label><br />
+<input type="text" name="user" value="${letter.user}" />
 <br /><br />
 
 <label for="content">メッセージ</label><br />
-<input type="text" name="content" value="${message.content}">
+<%-- <input type="text" name="content" value="${letter.content}"> --%>
+<textarea cols="40" rows="20" name="content"><c:out value="${letter.content}" /></textarea>
 <br /><br />
 
 <input type="hidden" name="_token" value="${_token}" />
