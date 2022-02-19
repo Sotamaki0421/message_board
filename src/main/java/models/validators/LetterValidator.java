@@ -3,19 +3,19 @@ package models.validators;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.Message;
+import models.Letter;
 
-public class MessageValidator {
+public class LetterValidator {
     // バリデーションを実行する
-    public static List<String> validate(Message m){
+    public static List<String> validate(Letter l){
         List<String> errors = new ArrayList<String>();
 
-        String title_error = validateTitle(m.getTitle());
-        if (!title_error.equals("")) {
-            errors.add(title_error);
+        String user_error = validateUser(l.getUser());
+        if (!user_error.equals("")) {
+            errors.add(user_error);
         }
 
-        String content_error = validateContent(m.getContent());
+        String content_error = validateContent(l.getContent());
         if (!content_error.equals("")) {
             errors.add(content_error);
         }
@@ -24,16 +24,16 @@ public class MessageValidator {
     }
 
     // タイトルの必須入力チェック
-    private static String validateTitle(String title) {
-        if (title != null || title.equals("")) {
-            return "タイトルを入力してください。";
+    private static String validateUser(String user) {
+        if (user == null || user.equals("")) {
+            return "ユーザ名を入力してください。";
         }
 
         return "";
     }
 
     private static String validateContent(String content) {
-        if (content != null || content.equals("")) {
+        if (content == null || content.equals("")) {
             return "メッセージを入力してください。";
         }
 
