@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Message;
+import models.Letter;
 import utils.DBUtil;
 
 /**
@@ -34,18 +34,18 @@ public class EditServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // 該当のIDのメッセージ1件のみをデータベースから取得
-        Message m = em.find(Message.class, Integer.parseInt(request.getParameter("id")));
+        Letter l = em.find(Letter.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
         // メッセージ情報とセッションIDをリクエストスコープに登録
-        request.setAttribute("message", m);
+        request.setAttribute("letter", l);
         request.setAttribute("_token", request.getSession().getId());
 
         // メッセージデータが存在している時のみ
         // メッセージIDをセッションスコープに登録
-        if (m != null) {
-            request.getSession().setAttribute("message_id", m.getId());
+        if (l != null) {
+            request.getSession().setAttribute("letter_id", l.getId());
         }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/messages/edit.jsp");

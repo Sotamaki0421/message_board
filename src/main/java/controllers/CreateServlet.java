@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Message;
-import models.validators.MessageValidator;
+import models.Letter;
+import models.validators.LetterValidator;
 import utils.DBUtil;
 
 /**
@@ -39,26 +39,26 @@ public class CreateServlet extends HttpServlet {
             EntityManager em = DBUtil.createEntityManager();
             em.getTransaction().begin();
 
-            Message m = new Message();
+            Letter l = new Letter();
 
-            String title = request.getParameter("title");
-            m.setTitle(title);
+            String user = request.getParameter("user");
+            l.setUser(user);
 
             String content = request.getParameter("content");
-            m.setContent(content);
+            l.setContent(content);
 
-            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-            m.setCreated_at(currentTime);
-            m.setUpdated_at(currentTime);
+//            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+            l.setRelease_date(Timestamp.valueOf("2022-02-18 00:00:00"));
+//            l.setUpdated_at(currentTime);
 
             // バリデーションを実行してエラーがあったら新規登録のフォームに戻る
-            List<String> errors = MessageValidator.validate(m);
+            List<String> errors = LetterValidator.validate(l);
             if (errors.size() > 0) {
                 em.close();
 
                 // フォームに初期値を設定、さらにエラーメッセージを送る
                 request.setAttribute("_token", request.getSession().getId());
-                request.setAttribute("message", m);
+                request.setAttribute("letter", l);
                 request.setAttribute("errors", errors);
 
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/messages/new.jsp");
@@ -66,7 +66,7 @@ public class CreateServlet extends HttpServlet {
 
             }else {
                 // データベースに保存
-                em.persist(m);
+                em.persist(l);
                 em.getTransaction().commit();
                 request.getSession().setAttribute("flush", "登録が完了しました");
                 em.close();
