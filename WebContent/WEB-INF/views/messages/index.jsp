@@ -8,6 +8,7 @@
             </div>
         </c:if> --%>
         <div class="gallery js-flickity" data-flickity-options='{ "wrapAround": true }'>
+            <div class="gallery-cell"><img src="<c:url value="img/Yose.png"/>" style="width: 100%;"></div>
             <c:forEach var="letter" items="${letters}">
                 <div class="gallery-cell">
                     <div class="note_wrap">
@@ -21,6 +22,5 @@
                 </div>
             </c:forEach>
         </div>
-        <%-- <p><a href="<c:url value="/new" />">新規メッセージの投稿</a></p> --%>
     </c:param>
 </c:import>
